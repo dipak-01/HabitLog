@@ -270,9 +270,20 @@ void TerminalUI::listHabits() {
     int streak = manager_.getCurrentStreak(h.id);
     std::string status = h.active ? std::string(GREEN) + "Active " + RESET
                                   : std::string(DIM) + "Archived" + RESET;
+
+    // Color-code category badge
+    std::string catColor;
+    std::string cat = h.category;
+    if      (cat == "Health")   catColor = BRIGHT_GREEN;
+    else if (cat == "Coding")   catColor = BRIGHT_CYAN;
+    else if (cat == "Learning") catColor = BRIGHT_YELLOW;
+    else if (cat == "Wellness") catColor = BRIGHT_MAGENTA;
+    else                        catColor = WHITE;
+
     std::cout << "  " << BRIGHT_CYAN << std::setw(5) << h.id << RESET
-              << std::left << std::setw(22) << h.name << std::setw(14)
-              << h.category << status;
+              << std::left << std::setw(22) << h.name
+              << catColor << std::setw(14) << cat << RESET
+              << status;
     if (streak > 0)
       std::cout << " 🔥 " << BRIGHT_YELLOW << streak << RESET;
     std::cout << "\n";
