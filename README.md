@@ -63,8 +63,15 @@ The executable is at `build/habitlog`.
 
 ## 🚀 Usage
 
+Launch interactive mode:
 ```bash
 ./build/habitlog
+```
+
+Command line flags:
+```bash
+./build/habitlog --help       # Display help and options
+./build/habitlog --version    # Print version information
 ```
 
 Navigate the numbered menu:
