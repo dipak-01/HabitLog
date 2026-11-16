@@ -50,7 +50,7 @@ A full-featured, **C++17 terminal habit tracker** with a rich ANSI color UI, JSO
 ### Steps
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/dipak-01/HabitLog.git
 cd HabitLog
 mkdir -p build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
