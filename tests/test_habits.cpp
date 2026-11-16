@@ -145,6 +145,31 @@ void testEditAndDelete() {
     std::cout << "  [PASS] testEditAndDelete\n";
 }
 
+void testArchiveHabit() {
+    JsonStorage storage;
+    HabitManager mgr(storage);
+    mgr.load();
+
+    Habit& h = mgr.addHabit("Coding Practice", "Competitive programming", "Coding");
+    int id = h.id;
+
+    assert(h.active == true);
+    bool archived = mgr.archiveHabit(id);
+    assert(archived == true);
+
+    auto opt = mgr.findHabit(id);
+    assert(opt.has_value());
+    assert(opt->get().active == false);
+
+    // Active habits should exclude archived habit
+    auto activeHabits = mgr.getActiveHabits();
+    for (const auto& habit : activeHabits) {
+        assert(habit.id != id);
+    }
+
+    std::cout << "  [PASS] testArchiveHabit\n";
+}
+
 int main() {
     setupTestEnv();
     std::cout << "\n  HabitLog Test Suite\n";
@@ -156,6 +181,7 @@ int main() {
         testUndoCompletion();
         testStreak();
         testEditAndDelete();
+        testArchiveHabit();
     } catch (const std::exception& e) {
         std::cerr << "\n  [FAIL] Exception: " << e.what() << "\n";
         return 1;
